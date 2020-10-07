@@ -1,12 +1,18 @@
 import React from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import styled from "styled-components";
+
+const AppName = styled.h1`
+  color: ${(props) => props.theme.colors.text};
+  font-size: 2rem;
+`;
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <AppName>Childcare App</AppName>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
