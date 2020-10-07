@@ -1,8 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-html {
-    height: 100%
+body {
+    background: ${(props) => props.theme.colors.lighter};
+    color: ${(props) => props.theme.colors.text};
 }
 `;
 
