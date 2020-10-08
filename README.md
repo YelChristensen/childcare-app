@@ -4,7 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Mobile version:
 
-![Figma Mobile Wireframe](/src/assets/mobileFrame.png) { width=20% }
+//![Figma Mobile Wireframe](/src/assets/mobileFrame.png)
+[<img src="/src/assets/mobileFrame.png" width="250"/>](/src/assets/mobileFrame.png)
 
 Desktop version:
 
