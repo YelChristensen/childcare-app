@@ -3,9 +3,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Initial wireframe created with Figma
 
 Mobile version:
-![Figma Mobile Wireframe](/src/assets/mobileFrame.png)
+
+![Figma Mobile Wireframe](/src/assets/mobileFrame.png=250x)
 
 Desktop version:
+
 ![Figma Wireframe](/src/assets/wireframeFigma.png)
 
 ## Available Scripts
