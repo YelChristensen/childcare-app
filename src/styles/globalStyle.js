@@ -1,9 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+
 body {
-    background: ${(props) => props.theme.colors.lighter};
+    margin: 0;
     color: ${(props) => props.theme.colors.text};
+    font-family: 'Patrick Hand SC', cursive;
 }
 `;
 

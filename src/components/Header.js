@@ -1,18 +1,25 @@
 import React from "react";
 import logo from "../assets/logo512.png";
+import { Button, Grid, Typography } from "@material-ui/core";
 import styled from "styled-components";
 
-const AppName = styled.h1`
+const Heading = styled.header`
+  background-color: ${(props) => props.theme.colors.lighter};
   color: ${(props) => props.theme.colors.text};
-  font-size: 2rem;
 `;
 
 function Header() {
   return (
-    <div>
-      <img src={logo} className="App-logo" alt="logo" />
-      <AppName>Childcare</AppName>
-    </div>
+    <Heading>
+      <Grid wrap="nowrap" alignItems="center">
+        <img width="60rem" src={logo} className="App-logo" alt="logo" />
+        <Typography variant="h6" display="inline">
+          Childcare
+        </Typography>
+
+        <Button>Log in</Button>
+      </Grid>
+    </Heading>
   );
 }
 
