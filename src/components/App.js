@@ -1,14 +1,14 @@
 import React from "react";
-import { AppBar } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import Header from "./Header";
 
 function App() {
   return (
-    <div>
-      <AppBar position="sticky">
+    <Grid container>
+      <Grid item xs={12}>
         <Header />
-      </AppBar>
-      <div>
+      </Grid>
+      <Grid item container>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut urna
         facilisis, porta ipsum ut, blandit arcu. Phasellus vel dolor ac est
         sodales auctor vel viverra risus. Phasellus sit amet dolor imperdiet,
@@ -50,8 +50,8 @@ function App() {
         felis. Nam non venenatis dui. Nulla lobortis ipsum lacus, ac feugiat
         odio aliquam id. Aliquam tristique risus quis consequat euismod. Proin
         vel tempor eros.
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 }
 
