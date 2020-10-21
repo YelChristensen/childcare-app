@@ -10,6 +10,8 @@ const nanny = (
         photo: action.photo,
         location: action.location,
         nannyID: action.id,
+        bio: action.bio,
+        filter: action.filter,
       });
     default:
       return state;

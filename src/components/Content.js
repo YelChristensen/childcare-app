@@ -1,5 +1,6 @@
 import React from "react";
 import Search from "./Search";
+import NannyContainer from "../containers/NannyContainer";
 import { Box, Grid, Link } from "@material-ui/core";
 
 export default function Content() {
@@ -32,6 +33,7 @@ export default function Content() {
           For local Nanny results enter your full postcode in the search above
           or try our Advanced Search feature.
         </Grid>
+        <NannyContainer />
       </Grid>
       <Grid item xs={1} sm={2} md={3} />
     </Grid>
