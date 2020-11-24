@@ -1,33 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { Card, CardHeader, CardMedia, CardContent } from "@material-ui/core";
 
-class Nanny extends React.Component {
-  componentDidMount() {
-    const { id, getNannyFromDB } = this.props;
-    getNannyFromDB(id);
-  }
-
-  render() {
-    const { profile } = this.props;
-
-    console.log(profile);
-    return (
-      <Card>
-        <CardHeader
-          title={(profile.firstName, profile.lastName)}
-          subtitle={profile.location}
-        />
-        <CardMedia image={profile.photo} />
-        <CardContent>{profile.bio}</CardContent>
-      </Card>
-    );
-  }
-}
-
-Nanny.propTypes = {
-  getNannyFromDB: PropTypes.func.isRequired,
-  profile: PropTypes.instanceOf(Array).isRequired,
+const Nanny = (props) => {
+  console.log(props.nanny);
+  return (
+    <Card>
+      <CardHeader
+        title={(props.nanny.first_name, props.nanny.last_name)}
+        subtitle={props.nanny.city}
+      />
+      <CardMedia image={`/assets/${props.nanny.photo}`} />
+      <CardContent>{props.nanny.bio}</CardContent>
+    </Card>
+  );
 };
-
 export default Nanny;

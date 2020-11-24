@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Search from "./Search";
-import NannyContainer from "../containers/NannyContainer";
+import Nanny from "./Nanny";
 import { Box, Grid, Link } from "@material-ui/core";
 
 export default function Content() {
+  const [nannyList, setNannyList] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/nanny")
+      .then((data) => data.json())
+      .then((nannies) => setNannyList(nannies))
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <Grid container>
       <Grid item xs={1} sm={2} />
@@ -30,10 +40,12 @@ export default function Content() {
           <Link>Paying your Nanny</Link>
         </Grid>
         <Grid>
-          For local Nanny results enter your full postcode in the search above
-          or try our Advanced Search feature.
+          For local Nanny results choose your location in the dropdown list
+          above.
         </Grid>
-        <NannyContainer />
+        {nannyList.map((nanny) => (
+          <Nanny key={nanny.id} nanny={nanny} />
+        ))}
       </Grid>
       <Grid item xs={1} sm={2} md={3} />
     </Grid>

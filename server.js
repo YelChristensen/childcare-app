@@ -20,6 +20,10 @@ app.get("/", function (req, res) {
 });
 app.set("port", process.env.PORT || 8080);
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  next();
+});
 // retrieve all nannies
 app.get("/api/nanny", (req, res) => {
   db.any("SELECT * FROM nanny")
@@ -27,6 +31,41 @@ app.get("/api/nanny", (req, res) => {
     .catch((error) => res.json({ error: error.message }));
 });
 
-app.listen(8080, function () {
-  console.log("Listening on port 8080");
+//retrieve nanny by id
+app.get("/api/nanny/:id", (req, res) => {
+  const { id } = req.params;
+  return db
+    .one(
+      "SELECT id, first_name, last_name, tel, bio, photo, filter FROM nanny WHERE id=$1",
+      [id]
+    )
+    .then((data) => {
+      res.json(data);
+      console.log(data);
+    })
+    .catch((error) => res.json({ error: error.message }));
 });
+
+// app.listen(8080, function () {
+//   console.log("Listening on port 8080");
+// });
+
+app.listen(app.get("port"), () => {
+  console.log(`Listening on ${app.get("port")}`);
+});
+
+// Listen on a specific host via the HOST environment variable
+// const host = process.env.HOST || "0.0.0.0";
+// Listen on a specific port via the PORT environment variable
+// const port = process.env.PORT || 8080;
+
+// const cors_proxy = require("cors-anywhere");
+// cors_proxy
+//   .createServer({
+//     originWhitelist: [], // Allow all origins
+//     requireHeader: ["origin", "x-requested-with"],
+//     removeHeaders: ["cookie", "cookie2"],
+//   })
+//   .listen(port, host, function () {
+//     console.log("Running CORS Anywhere on " + host + ":" + port);
+//   });

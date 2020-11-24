@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../assets/logo512.png";
 
-import { AppBar, Toolbar, Typography, Button, Grid } from "@material-ui/core";
+import { AppBar, Toolbar, Button, Grid } from "@material-ui/core";
 
 export default function Header() {
   return (
