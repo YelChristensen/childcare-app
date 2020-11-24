@@ -1,17 +1,33 @@
 import React from "react";
 // import PropTypes from "prop-types";
-import { Card, CardHeader, CardMedia, CardContent } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+} from "@material-ui/core";
+import PhoneTwoToneIcon from "@material-ui/icons/PhoneTwoTone";
+import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
 
 const Nanny = (props) => {
   console.log(props.nanny);
   return (
     <Card>
       <CardHeader
-        title={(props.nanny.first_name, props.nanny.last_name)}
-        subtitle={props.nanny.city}
+        title={`${props.nanny.first_name}  ${props.nanny.last_name}`}
+        subheader={props.nanny.city}
       />
-      <CardMedia image={`/assets/${props.nanny.photo}`} />
+      <CardMedia image={props.nanny.photo} />
       <CardContent>{props.nanny.bio}</CardContent>
+      <Button>
+        <PhoneTwoToneIcon />
+        {props.nanny.tel}
+      </Button>
+      <Button>
+        <EmailTwoToneIcon />
+        {props.nanny.email}
+      </Button>
     </Card>
   );
 };

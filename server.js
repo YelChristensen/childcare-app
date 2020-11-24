@@ -12,6 +12,9 @@ const db = pgp({
   password: process.env.DB_PASSWORD,
 });
 
+const AWS = require("aws-sdk");
+const bluebird = require("bluebird");
+
 app.use(bodyParser.json());
 app.use("/static", express.static("static"));
 app.set("view engine", "hbs");
@@ -24,6 +27,17 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   next();
 });
+
+// configure the keys for accessing AWS
+AWS.config.update({
+  region: process.env.S3_REGION,
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+});
+
+// configure AWS to work with promises
+AWS.config.setPromisesDependency(bluebird);
+
 // retrieve all nannies
 app.get("/api/nanny", (req, res) => {
   db.any("SELECT * FROM nanny")
