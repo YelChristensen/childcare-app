@@ -26,10 +26,6 @@ export default function Content() {
         <Grid>
           <Search />
         </Grid>
-        <img
-          src="https://childcareapp.s3.eu-west-2.amazonaws.com/image_1.jpg"
-          alt="whatever"
-        />
         <Grid>
           A nanny provides childcare for one or more children in the parent's
           own home. Nannies can sometimes live-in with the family. Many families

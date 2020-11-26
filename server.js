@@ -13,7 +13,6 @@ const db = pgp({
 });
 
 const AWS = require("aws-sdk");
-const bluebird = require("bluebird");
 
 app.use(bodyParser.json());
 app.use("/static", express.static("static"));
@@ -28,15 +27,27 @@ app.use((req, res, next) => {
   next();
 });
 
-// configure the keys for accessing AWS
-AWS.config.update({
-  region: process.env.S3_REGION,
-  accessKeyId: process.env.S3_ACCESS_KEY_ID,
-  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-});
+// configure the keys for accessing
+(async function () {
+  AWS.config.setPromisesDependency();
+  try {
+    AWS.config.update({
+      region: process.env.S3_REGION,
+      accessKeyId: process.env.S3_ACCESS_KEY_ID,
+      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    });
 
-// configure AWS to work with promises
-AWS.config.setPromisesDependency(bluebird);
+    const s3 = new AWS.S3();
+    const response = await s3
+      .listObjectsV2({
+        Bucket: "childcareapp",
+      })
+      .promise();
+    console.log(response);
+  } catch (e) {
+    console.log("our error", e);
+  }
+})();
 
 // retrieve all nannies
 app.get("/api/nanny", (req, res) => {
