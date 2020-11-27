@@ -12,7 +12,6 @@ import PhoneTwoToneIcon from "@material-ui/icons/PhoneTwoTone";
 import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
 
 const Nanny = (props) => {
-  console.log(props.nanny.photo);
   return (
     <Card>
       <Grid container>

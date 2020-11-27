@@ -10,7 +10,10 @@ export default function Content() {
   useEffect(() => {
     fetch("http://localhost:8080/api/nanny")
       .then((data) => data.json())
-      .then((nannies) => setNannyList(nannies))
+      .then((nannies) => {
+        console.log(nannies);
+        setNannyList(nannies);
+      })
       .catch((error) => console.log(error));
   }, []);
 
