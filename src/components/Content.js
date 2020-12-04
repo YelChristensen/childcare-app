@@ -1,23 +1,55 @@
 import React, { useEffect, useState } from "react";
 import Search from "./Search";
 import Nanny from "./Nanny";
+import { DataContext } from "./DataContext";
+
 import { Box, Grid, Link } from "@material-ui/core";
 
 export default function Content() {
   const [nannyList, setNannyList] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
+  const [locations, setLocations] = useState([]);
+  const [filters, setFilters] = useState([]);
+  const [data, setData] = useState({ location: [], filter: [] });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/nanny")
-      .then((data) => data.json())
-      .then((nannies) => {
-        console.log(nannies);
-        setNannyList(nannies);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+    async function fetchData() {
+      setIsLoading(true);
+      try {
+        const fetcher = await window.fetch("http://localhost:8080/api/nanny");
+        const response = await fetcher.json();
+        setNannyList(response);
+        setLocations([...new Set(response.map((a) => a.city))]);
+        setFilters([...new Set(response.map((a) => a.filter))]);
 
-  return (
+        // let locationsArr = [...new Set(locations)];
+        // let filtersArr = [...new Set(filters)];
+        // console.log(locationsArr, "locationsArr");
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchData();
+    // fetch("http://localhost:8080/api/nanny")
+    //   .then((data) => data.json())
+    //   .then((nannies) => {
+    //     setNannyList(nannies);
+    //     setLocations(nannies.map((a) => a.city));
+    //     setFilters(nannies.map((a) => a.filter));
+    //   })
+    //   .catch((error) => console.log(error));
+  }, []);
+  useEffect(() => setData({ location: locations, filter: filters }), [
+    locations,
+    filters,
+  ]);
+  console.log(data, "locations");
+
+  return isLoading ? (
+    <div>Loading</div>
+  ) : (
     <Grid container>
       <Grid item xs={1} sm={2} />
       <Grid item container xs={10} sm={8} direction="column">
@@ -27,7 +59,9 @@ export default function Content() {
           </Box>
         </Grid>
         <Grid>
-          <Search />
+          <DataContext.Provider value={data}>
+            <Search />
+          </DataContext.Provider>
         </Grid>
         <Grid>
           A nanny provides childcare for one or more children in the parent's

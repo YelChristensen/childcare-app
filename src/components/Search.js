@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
+import { DataContext } from "./DataContext";
+
 import { Box, Button, Grid } from "@material-ui/core";
 
 export default function Search() {
+  // console.log(uniqueLocations, uniqueFilters);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [locationsValue, setLocationsValue] = useState(uniqueLocations);
+  // const [filtersValue, setFiltersValue] = useState(uniqueFilters);
+  // // This will launch only if propName value has chaged.
+  // useEffect(() => {
+  //   setLocationsValue(uniqueLocations);
+  //   setFiltersValue(uniqueFilters);
+  //   setIsLoading(false);
+  // }, [uniqueLocations, uniqueFilters]);
+
   return (
     <Grid container spacing={2} alignItems="flex-end">
       <Grid
@@ -15,7 +28,8 @@ export default function Search() {
         alignContent="center"
       >
         <Box textAlign="center">Location:</Box>
-        <Dropdown />
+
+        <Dropdown id={"location"} />
       </Grid>
       <Grid
         item
@@ -27,7 +41,7 @@ export default function Search() {
         alignContent="center"
       >
         <Box textAlign="center">Child's Age:</Box>
-        <Dropdown />
+        <Dropdown id={"filter"} />
       </Grid>
       <Grid
         item
@@ -39,7 +53,7 @@ export default function Search() {
         alignContent="center"
       >
         <Box textAlign="center">Filter:</Box>
-        <Dropdown />
+        <Dropdown id={"filter"} />
       </Grid>
       <Grid
         item

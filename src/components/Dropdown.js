@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { DataContext } from "./DataContext";
 import ArrowDropDownRoundedIcon from "@material-ui/icons/ArrowDropDownRounded";
 import Button from "@material-ui/core/Button";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -18,7 +19,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuListComposition() {
+export default function MenuListComposition(props) {
+  const [isLoading, setIsLoading] = useState(true);
+  const dropdownName = props.id;
+  console.log(dropdownName, "dropdownName");
+  // const [locationValue, setLocationValue] = useState();
+  // const [filterValue, setFilterValue] = useState();
+  // // This will launch only if propName value has chaged.
+
+  const { location, filter } = useContext(DataContext);
+
+  useEffect(() => {
+    location && filter ? setIsLoading(false) : setIsLoading(true);
+  }, [location, filter]);
+  console.log(location, filter, "data in search");
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -52,7 +67,11 @@ export default function MenuListComposition() {
     prevOpen.current = open;
   }, [open]);
 
-  return (
+  // console.log(locationValue[0], locationValue, filterValue, "dropdown");
+
+  return isLoading ? (
+    <div>dropdown loading</div>
+  ) : (
     <div className={classes.root}>
       <Button
         ref={anchorRef}
@@ -84,9 +103,17 @@ export default function MenuListComposition() {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>London</MenuItem>
-                  <MenuItem onClick={handleClose}>Birmingham</MenuItem>
-                  <MenuItem onClick={handleClose}>Penzance</MenuItem>
+                  {dropdownName === "location"
+                    ? location.map((l) => (
+                        <MenuItem key={l} onClick={handleClose}>
+                          {l}
+                        </MenuItem>
+                      ))
+                    : filter.map((l) => (
+                        <MenuItem key={l} onClick={handleClose}>
+                          {l}
+                        </MenuItem>
+                      ))}
                 </MenuList>
               </ClickAwayListener>
             </Paper>
