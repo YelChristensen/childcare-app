@@ -41,7 +41,7 @@ export default function Search() {
         alignContent="center"
       >
         <Box textAlign="center">Child's Age:</Box>
-        <Dropdown id={"filter"} />
+        <Dropdown />
       </Grid>
       <Grid
         item

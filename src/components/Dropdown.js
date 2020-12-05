@@ -67,6 +67,32 @@ export default function MenuListComposition(props) {
     prevOpen.current = open;
   }, [open]);
 
+  let menuItem;
+  if (dropdownName === "location") {
+    menuItem = location.map((l) => (
+      <MenuItem key={l} onClick={handleClose}>
+        {l}
+      </MenuItem>
+    ));
+  } else if (dropdownName === "filter") {
+    menuItem = filter.map((f) => (
+      <MenuItem key={f} onClick={handleClose}>
+        {f}
+      </MenuItem>
+    ));
+  } else {
+    let ageArr = [];
+    for (let i = 0; i < 17; i++) {
+      ageArr.push(i);
+    }
+    console.log(ageArr);
+    menuItem = ageArr.map((i) => (
+      <MenuItem key={i} onClick={handleClose}>
+        {i}
+      </MenuItem>
+    ));
+  }
+
   // console.log(locationValue[0], locationValue, filterValue, "dropdown");
 
   return isLoading ? (
@@ -103,17 +129,7 @@ export default function MenuListComposition(props) {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  {dropdownName === "location"
-                    ? location.map((l) => (
-                        <MenuItem key={l} onClick={handleClose}>
-                          {l}
-                        </MenuItem>
-                      ))
-                    : filter.map((l) => (
-                        <MenuItem key={l} onClick={handleClose}>
-                          {l}
-                        </MenuItem>
-                      ))}
+                  {menuItem}
                 </MenuList>
               </ClickAwayListener>
             </Paper>
