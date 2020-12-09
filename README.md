@@ -1,10 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[<img src="/src/assets/Screenshot1.png" width="250"/>](/src/assets/Screenshot1.png)
-
-[<img src="/src/assets/Screenshot2.png" width="250"/>](/src/assets/Screenshot2.png)
-
-[<img src="/src/assets/Screenshot3.png" width="250"/>](/src/assets/Screenshot3.png)
+[<img src="/src/assets/ScreenshotMain.png" width="250"/>](/src/assets/ScreenshotMain.png)
 
 ## Available Scripts
 
