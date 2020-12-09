@@ -3,7 +3,8 @@ import Search from "./Search";
 import Nanny from "./Nanny";
 import { DataContext } from "./DataContext";
 
-import { Box, Grid, Link } from "@material-ui/core";
+import { Button, Box, Grid, Link } from "@material-ui/core";
+import { SentimentSatisfiedAltOutlined } from "@material-ui/icons";
 
 export default function Content() {
   const [nannyList, setNannyList] = useState([]);
@@ -15,6 +16,7 @@ export default function Content() {
   });
   const [searchArr, setSearchArr] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [seeAll, setSeeAll] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -43,6 +45,10 @@ export default function Content() {
   function handleClick(newSearchArr) {
     setSearchArr(newSearchArr);
     console.log(newSearchArr, "search array");
+  }
+
+  function handleSeeAll() {
+    setSeeAll(true);
   }
 
   return isLoading ? (
@@ -76,11 +82,13 @@ export default function Content() {
         </Grid>
         <Grid>
           For local Nanny results choose your location in the dropdown list
-          above.
+          above. Or you can <Button onClick={handleSeeAll}>See all</Button>
         </Grid>
-        {nannyList.map((nanny) => (
-          <Nanny key={nanny.id} nanny={nanny} />
-        ))}
+        {seeAll ? (
+          nannyList.map((nanny) => <Nanny key={nanny.id} nanny={nanny} />)
+        ) : (
+          <div></div>
+        )}
       </Grid>
       <Grid item xs={1} sm={2} md={3} />
     </Grid>
