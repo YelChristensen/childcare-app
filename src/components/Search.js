@@ -22,22 +22,16 @@ export default function Search(props) {
   }
 
   function handleClick(event) {
-    if (searchLocation !== "Choose one") {
-      searchArr.splice(0, 1, searchLocation);
+    if (
+      searchLocation === "Choose one" ||
+      searchAge === "Choose one" ||
+      searchFilter === "Choose one"
+    ) {
+      alert("Choose one value from each dropdown");
     } else {
-      return;
+      searchArr.splice(0, 3, searchLocation, searchAge, searchFilter);
+      props.onClick(searchArr);
     }
-    if (searchAge !== "Choose one") {
-      searchArr.splice(1, 1, searchAge);
-    } else {
-      return;
-    }
-    if (searchFilter !== "Choose one") {
-      searchArr.splice(2, 1, searchFilter);
-    } else {
-      return;
-    }
-    props.onClick(searchArr);
   }
 
   return (

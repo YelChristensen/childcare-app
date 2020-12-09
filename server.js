@@ -56,38 +56,11 @@ app.get("/api/nanny", (req, res) => {
     .catch((error) => res.json({ error: error.message }));
 });
 
-//retrieve nanny by id
-// app.get("/api/nanny/:id", (req, res) => {
-//   const { id } = req.params;
-//   return db
-//     .one(
-//       "SELECT id, first_name, last_name, tel, bio, photo, filter FROM nanny WHERE id=$1",
-//       [id]
-//     )
-//     .then((data) => {
-//       res.json(data);
-//       console.log(data);
-//     })
-//     .catch((error) => res.json({ error: error.message }));
-// });
-
-// app.get("/api/nanny/:filter", (req, res) => {
-// const { filter } = req.params;
-// return db
-//   .one(
-//     "select * from nanny WHERE city = $1' and min_child_age <= $2 and max_child_age >= $2 and filter = $3", [filter[0], filter[1], filter[2]]
-//   )
-//   .then((data) => {
-//     res.json(data);
-//     console.log(data);
-//   })
-
 app.get("/api/nanny/:search", (req, res) => {
   let arr = req.params.search.split(",");
   const city = arr[0];
   const age = arr[1];
   const filter = arr[2];
-  console.log(city, filter, "server.js");
 
   return db
     .any(

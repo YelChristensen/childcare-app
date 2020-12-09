@@ -44,9 +44,20 @@ export default function Content() {
   console.log(data, "locations");
 
   function handleClick(newSearchArr) {
-    setSearchArr(newSearchArr);
-    setShowText(false);
-    performFilter(newSearchArr);
+    console.log(newSearchArr[0], "in handle click");
+
+    if (
+      newSearchArr[0].length === 0 ||
+      newSearchArr[1].length === 0 ||
+      newSearchArr[2].length === 0
+    ) {
+      alert("Please choose a value in each dropdown");
+    } else {
+      setSearchArr(newSearchArr);
+      setShowText(false);
+      performFilter(newSearchArr);
+      setSeeAll(false);
+    }
   }
 
   function handleSeeAll() {
@@ -64,18 +75,6 @@ export default function Content() {
         console.log(body);
       });
   }
-
-  // function sentenceCase(str) {
-  //   let strLower = str.toLowerCase();
-  //   return strLower
-  //     .split(" ")
-  //     .map((item) => {
-  //       const word = item.split("");
-  //       word[0] = word[0].toUpperCase();
-  //       return word.join("");
-  //     })
-  //     .join(" ");
-  // }
 
   return isLoading ? (
     <div>Loading</div>
