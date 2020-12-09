@@ -71,26 +71,6 @@ app.get("/api/nanny/:id", (req, res) => {
     .catch((error) => res.json({ error: error.message }));
 });
 
-// app.listen(8080, function () {
-//   console.log("Listening on port 8080");
-// });
-
 app.listen(app.get("port"), () => {
   console.log(`Listening on ${app.get("port")}`);
 });
-
-// Listen on a specific host via the HOST environment variable
-// const host = process.env.HOST || "0.0.0.0";
-// Listen on a specific port via the PORT environment variable
-// const port = process.env.PORT || 8080;
-
-// const cors_proxy = require("cors-anywhere");
-// cors_proxy
-//   .createServer({
-//     originWhitelist: [], // Allow all origins
-//     requireHeader: ["origin", "x-requested-with"],
-//     removeHeaders: ["cookie", "cookie2"],
-//   })
-//   .listen(port, host, function () {
-//     console.log("Running CORS Anywhere on " + host + ":" + port);
-//   });

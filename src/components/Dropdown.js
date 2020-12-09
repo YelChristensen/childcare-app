@@ -22,17 +22,12 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuListComposition(props) {
   const [isLoading, setIsLoading] = useState(true);
   const dropdownName = props.id;
-  console.log(dropdownName, "dropdownName");
-  // const [locationValue, setLocationValue] = useState();
-  // const [filterValue, setFilterValue] = useState();
-  // // This will launch only if propName value has chaged.
-
   const { location, filter } = useContext(DataContext);
+  const [itemName, setItemName] = useState("Choose one");
 
   useEffect(() => {
     location && filter ? setIsLoading(false) : setIsLoading(true);
   }, [location, filter]);
-  console.log(location, filter, "data in search");
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -47,6 +42,15 @@ export default function MenuListComposition(props) {
       return;
     }
 
+    setOpen(false);
+  };
+
+  const handleClick = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+    props.onClick(event.target.textContent);
+    setItemName(event.target.textContent);
     setOpen(false);
   };
 
@@ -70,13 +74,13 @@ export default function MenuListComposition(props) {
   let menuItem;
   if (dropdownName === "location") {
     menuItem = location.map((l) => (
-      <MenuItem key={l} onClick={handleClose}>
+      <MenuItem key={l} value={props.searchLocation} onClick={handleClick}>
         {l}
       </MenuItem>
     ));
   } else if (dropdownName === "filter") {
     menuItem = filter.map((f) => (
-      <MenuItem key={f} onClick={handleClose}>
+      <MenuItem key={f} onClick={handleClick}>
         {f}
       </MenuItem>
     ));
@@ -85,16 +89,19 @@ export default function MenuListComposition(props) {
     for (let i = 0; i < 17; i++) {
       ageArr.push(i);
     }
-    console.log(ageArr);
     menuItem = ageArr.map((i) => (
-      <MenuItem key={i} onClick={handleClose}>
+      <MenuItem key={i} onClick={handleClick}>
         {i}
       </MenuItem>
     ));
   }
 
-  // console.log(locationValue[0], locationValue, filterValue, "dropdown");
-
+  //creating
+  //space
+  //to see
+  //where
+  //"return"
+  //starts
   return isLoading ? (
     <div>dropdown loading</div>
   ) : (
@@ -105,7 +112,7 @@ export default function MenuListComposition(props) {
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        Menu Item <ArrowDropDownRoundedIcon />
+        {itemName} <ArrowDropDownRoundedIcon />
       </Button>
       <Popper
         open={open}

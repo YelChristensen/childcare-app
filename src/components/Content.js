@@ -9,7 +9,11 @@ export default function Content() {
   const [nannyList, setNannyList] = useState([]);
   const [locations, setLocations] = useState([]);
   const [filters, setFilters] = useState([]);
-  const [data, setData] = useState({ location: [], filter: [] });
+  const [data, setData] = useState({
+    location: [],
+    filter: [],
+  });
+  const [searchArr, setSearchArr] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -21,10 +25,6 @@ export default function Content() {
         setNannyList(response);
         setLocations([...new Set(response.map((a) => a.city))]);
         setFilters([...new Set(response.map((a) => a.filter))]);
-
-        // let locationsArr = [...new Set(locations)];
-        // let filtersArr = [...new Set(filters)];
-        // console.log(locationsArr, "locationsArr");
       } catch (error) {
         console.log(error);
       } finally {
@@ -32,20 +32,18 @@ export default function Content() {
       }
     }
     fetchData();
-    // fetch("http://localhost:8080/api/nanny")
-    //   .then((data) => data.json())
-    //   .then((nannies) => {
-    //     setNannyList(nannies);
-    //     setLocations(nannies.map((a) => a.city));
-    //     setFilters(nannies.map((a) => a.filter));
-    //   })
-    //   .catch((error) => console.log(error));
   }, []);
+
   useEffect(() => setData({ location: locations, filter: filters }), [
     locations,
     filters,
   ]);
   console.log(data, "locations");
+
+  function handleClick(newSearchArr) {
+    setSearchArr(newSearchArr);
+    console.log(newSearchArr, "search array");
+  }
 
   return isLoading ? (
     <div>Loading</div>
@@ -60,7 +58,7 @@ export default function Content() {
         </Grid>
         <Grid>
           <DataContext.Provider value={data}>
-            <Search />
+            <Search value={searchArr} onClick={handleClick} />
           </DataContext.Provider>
         </Grid>
         <Grid>

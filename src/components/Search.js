@@ -1,20 +1,44 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState } from "react";
 import Dropdown from "./Dropdown";
-import { DataContext } from "./DataContext";
 
 import { Box, Button, Grid } from "@material-ui/core";
 
-export default function Search() {
-  // console.log(uniqueLocations, uniqueFilters);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [locationsValue, setLocationsValue] = useState(uniqueLocations);
-  // const [filtersValue, setFiltersValue] = useState(uniqueFilters);
-  // // This will launch only if propName value has chaged.
-  // useEffect(() => {
-  //   setLocationsValue(uniqueLocations);
-  //   setFiltersValue(uniqueFilters);
-  //   setIsLoading(false);
-  // }, [uniqueLocations, uniqueFilters]);
+export default function Search(props) {
+  const [searchLocation, setSearchLocation] = useState([]);
+  const [searchFilter, setSearchFilter] = useState([]);
+  const [searchAge, setSearchAge] = useState([]);
+  let searchArr = ["location", "age", "filter"];
+
+  function handleChangeLocation(newLocation) {
+    setSearchLocation(newLocation);
+  }
+
+  function handleChangeFilter(newFilter) {
+    setSearchFilter(newFilter);
+  }
+
+  function handleChangeAge(newAge) {
+    setSearchAge(newAge);
+  }
+
+  function handleClick(event) {
+    if (searchLocation !== "Choose one") {
+      searchArr.splice(0, 1, searchLocation);
+    } else {
+      return;
+    }
+    if (searchAge !== "Choose one") {
+      searchArr.splice(1, 1, searchAge);
+    } else {
+      return;
+    }
+    if (searchFilter !== "Choose one") {
+      searchArr.splice(2, 1, searchFilter);
+    } else {
+      return;
+    }
+    props.onClick(searchArr);
+  }
 
   return (
     <Grid container spacing={2} alignItems="flex-end">
@@ -29,7 +53,11 @@ export default function Search() {
       >
         <Box textAlign="center">Location:</Box>
 
-        <Dropdown id={"location"} />
+        <Dropdown
+          id={"location"}
+          value={searchLocation}
+          onClick={handleChangeLocation}
+        />
       </Grid>
       <Grid
         item
@@ -41,7 +69,7 @@ export default function Search() {
         alignContent="center"
       >
         <Box textAlign="center">Child's Age:</Box>
-        <Dropdown />
+        <Dropdown value={searchAge} onClick={handleChangeAge} />
       </Grid>
       <Grid
         item
@@ -53,7 +81,11 @@ export default function Search() {
         alignContent="center"
       >
         <Box textAlign="center">Filter:</Box>
-        <Dropdown id={"filter"} />
+        <Dropdown
+          id={"filter"}
+          value={searchFilter}
+          onClick={handleChangeFilter}
+        />
       </Grid>
       <Grid
         item
@@ -64,7 +96,7 @@ export default function Search() {
         direction="column"
         alignContent="center"
       >
-        <Button>Search</Button>
+        <Button onClick={handleClick}>Search</Button>
       </Grid>
     </Grid>
   );
