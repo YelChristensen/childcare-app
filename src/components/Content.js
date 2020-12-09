@@ -4,7 +4,6 @@ import Nanny from "./Nanny";
 import { DataContext } from "./DataContext";
 
 import { Button, Box, Grid, Link } from "@material-ui/core";
-import { SentimentSatisfiedAltOutlined } from "@material-ui/icons";
 
 export default function Content() {
   const [nannyList, setNannyList] = useState([]);
@@ -17,6 +16,7 @@ export default function Content() {
   const [searchArr, setSearchArr] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [seeAll, setSeeAll] = useState(false);
+  const [showText, setShowText] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -44,11 +44,13 @@ export default function Content() {
 
   function handleClick(newSearchArr) {
     setSearchArr(newSearchArr);
+    setShowText(false);
     console.log(newSearchArr, "search array");
   }
 
   function handleSeeAll() {
     setSeeAll(true);
+    setShowText(false);
   }
 
   return isLoading ? (
@@ -67,23 +69,30 @@ export default function Content() {
             <Search value={searchArr} onClick={handleClick} />
           </DataContext.Provider>
         </Grid>
-        <Grid>
-          A nanny provides childcare for one or more children in the parent's
-          own home. Nannies can sometimes live-in with the family. Many families
-          have a full-time nanny but it is also popular to employ a part-time
-          nanny or after school live-out nanny. Nannies who provide care for
-          newly born babies during the night are known as night nannies.
-        </Grid>
-        <Grid>
-          <Link>Choosing the right Nanny</Link>
-        </Grid>
-        <Grid>
-          <Link>Paying your Nanny</Link>
-        </Grid>
-        <Grid>
-          For local Nanny results choose your location in the dropdown list
-          above. Or you can <Button onClick={handleSeeAll}>See all</Button>
-        </Grid>
+        {showText ? (
+          <React.Fragment>
+            <Grid>
+              A nanny provides childcare for one or more children in the
+              parent's own home. Nannies can sometimes live-in with the family.
+              Many families have a full-time nanny but it is also popular to
+              employ a part-time nanny or after school live-out nanny. Nannies
+              who provide care for newly born babies during the night are known
+              as night nannies.
+            </Grid>
+            <Grid>
+              <Link>Choosing the right Nanny</Link>
+            </Grid>
+            <Grid>
+              <Link>Paying your Nanny</Link>
+            </Grid>
+            <Grid>
+              For local Nanny results choose your location in the dropdown list
+              above. Or you can <Button onClick={handleSeeAll}>See all</Button>
+            </Grid>
+          </React.Fragment>
+        ) : (
+          <div></div>
+        )}
         {seeAll ? (
           nannyList.map((nanny) => <Nanny key={nanny.id} nanny={nanny} />)
         ) : (
