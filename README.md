@@ -1,14 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### Initial wireframe created with Figma
+[<img src="/src/assets/Screenshot1.png" width="250"/>](/src/assets/Screenshot1.png)
 
-Mobile version:
+[<img src="/src/assets/Screenshot2.png" width="250"/>](/src/assets/Screenshot2.png)
 
-[<img src="/src/assets/mobileFrame.png" width="250"/>](/src/assets/mobileFrame.png)
-
-Desktop version:
-
-![Figma Wireframe](/src/assets/wireframeFigma.png)
+[<img src="/src/assets/Screenshot3.png" width="250"/>](/src/assets/Screenshot3.png)
 
 ## Available Scripts
 
