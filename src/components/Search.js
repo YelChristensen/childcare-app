@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import Dropdown from "./Dropdown";
 
-import { Box, Button, Grid } from "@material-ui/core";
+import { Box, Button, Grid, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    background: "#912787",
+    color: "white",
+    textTransform: "none",
+  },
+}));
 
 export default function Search(props) {
+  const classes = useStyles();
   const [searchLocation, setSearchLocation] = useState([]);
   const [searchFilter, setSearchFilter] = useState([]);
   const [searchAge, setSearchAge] = useState([]);
@@ -90,7 +99,13 @@ export default function Search(props) {
         direction="column"
         alignContent="center"
       >
-        <Button onClick={handleClick}>Search</Button>
+        <Button
+          classes={{ root: classes.root }}
+          variant="outlined"
+          onClick={handleClick}
+        >
+          Search
+        </Button>
       </Grid>
     </Grid>
   );

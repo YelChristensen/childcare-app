@@ -3,7 +3,15 @@ import Search from "./Search";
 import Nanny from "./Nanny";
 import { DataContext } from "./DataContext";
 
-import { Button, Box, Grid, Link } from "@material-ui/core";
+import { Button, Box, Grid, Link, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    background: "#912787",
+    color: "white",
+    textTransform: "none",
+  },
+}));
 
 export default function Content() {
   const [nannyList, setNannyList] = useState([]);
@@ -18,6 +26,7 @@ export default function Content() {
   const [seeAll, setSeeAll] = useState(false);
   const [showText, setShowText] = useState(true);
   const [filteredNannies, setFilteredNannies] = useState([]);
+  const classes = useStyles();
 
   useEffect(() => {
     async function fetchData() {
@@ -79,7 +88,7 @@ export default function Content() {
   return isLoading ? (
     <div>Loading</div>
   ) : (
-    <Grid container>
+    <Grid container style={{ color: "#1c165e" }}>
       <Grid item xs={1} sm={2} />
       <Grid item container xs={10} sm={8} direction="column">
         <Grid item>
@@ -115,7 +124,14 @@ export default function Content() {
             </Grid>
             <Grid>
               For local Nanny results choose your location in the dropdown list
-              above. Or you can <Button onClick={handleSeeAll}>See all</Button>
+              above. Or you can{" "}
+              <Button
+                classes={{ root: classes.root }}
+                variant="outlined"
+                onClick={handleSeeAll}
+              >
+                See all
+              </Button>
             </Grid>
           </React.Fragment>
         ) : (

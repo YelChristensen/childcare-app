@@ -110,6 +110,8 @@ export default function MenuListComposition(props) {
         ref={anchorRef}
         aria-controls={open ? "menu-list-grow" : undefined}
         aria-haspopup="true"
+        variant="outlined"
+        style={{ color: "#1c165e", textTransform: "none" }}
         onClick={handleToggle}
       >
         {itemName} <ArrowDropDownRoundedIcon />
