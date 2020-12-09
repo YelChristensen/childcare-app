@@ -55,20 +55,7 @@ export default function Content() {
   }
 
   function performFilter(newSearchArr) {
-    // console.log(newSearchArr[0], "filtered data");
-    const searchCity = newSearchArr[0];
-    console.log(searchCity, "search City");
-    // let url = "";
-    // if (newSearchArr[0] !== "Choose one") {
-    //   url = `http://localhost:8080/api/nanny/${newSearchArr[0]}`;
-    // } else if (newSearchArr[1] !== "Choose one") {
-    //   url = `http://localhost:8080/api/nanny/${newSearchArr[1]}`;
-    // } else if (newSearchArr[2] !== "Choose one") {
-    //   url = `http://localhost:8080/api/nanny/${newSearchArr[2]}`;
-    // } else {
-    //   url = "http://localhost:8080/api/nanny";
-    // }
-    fetch(`http://localhost:8080/api/nanny/${searchCity}`)
+    fetch(`http://localhost:8080/api/nanny/${newSearchArr}`)
       .then(function (response) {
         return response.json();
       })

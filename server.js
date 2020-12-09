@@ -82,11 +82,18 @@ app.get("/api/nanny", (req, res) => {
 //     console.log(data);
 //   })
 
-app.get("/api/nanny/:city", (req, res) => {
-  const city = req.params.city;
-  console.log(city, "server.js");
+app.get("/api/nanny/:search", (req, res) => {
+  let arr = req.params.search.split(",");
+  const city = arr[0];
+  const age = arr[1];
+  const filter = arr[2];
+  console.log(city, filter, "server.js");
+
   return db
-    .any(`select * from nanny WHERE city = $1`, [city])
+    .any(
+      `select * from nanny WHERE city = $1 and min_child_age <= $2 and max_child_age >= $2 and filter = $3`,
+      [city, age, filter]
+    )
     .then((data) => {
       res.json(data);
       console.log(data);
