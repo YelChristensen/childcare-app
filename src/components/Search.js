@@ -7,7 +7,7 @@ export default function Search(props) {
   const [searchLocation, setSearchLocation] = useState([]);
   const [searchFilter, setSearchFilter] = useState([]);
   const [searchAge, setSearchAge] = useState([]);
-  let searchArr = ["location", "age", "filter"];
+  let searchArr = ["Choose one", "Choose one", "Choose one"];
 
   function handleChangeLocation(newLocation) {
     setSearchLocation(newLocation);

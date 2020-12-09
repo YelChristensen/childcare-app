@@ -17,6 +17,7 @@ export default function Content() {
   const [isLoading, setIsLoading] = useState(false);
   const [seeAll, setSeeAll] = useState(false);
   const [showText, setShowText] = useState(true);
+  const [filteredNannies, setFilteredNannies] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -45,13 +46,49 @@ export default function Content() {
   function handleClick(newSearchArr) {
     setSearchArr(newSearchArr);
     setShowText(false);
-    console.log(newSearchArr, "search array");
+    performFilter(newSearchArr);
   }
 
   function handleSeeAll() {
     setSeeAll(true);
     setShowText(false);
   }
+
+  function performFilter(newSearchArr) {
+    // console.log(newSearchArr[0], "filtered data");
+    const searchCity = newSearchArr[0];
+    console.log(searchCity, "search City");
+    // let url = "";
+    // if (newSearchArr[0] !== "Choose one") {
+    //   url = `http://localhost:8080/api/nanny/${newSearchArr[0]}`;
+    // } else if (newSearchArr[1] !== "Choose one") {
+    //   url = `http://localhost:8080/api/nanny/${newSearchArr[1]}`;
+    // } else if (newSearchArr[2] !== "Choose one") {
+    //   url = `http://localhost:8080/api/nanny/${newSearchArr[2]}`;
+    // } else {
+    //   url = "http://localhost:8080/api/nanny";
+    // }
+    fetch(`http://localhost:8080/api/nanny/${searchCity}`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then((body) => {
+        setFilteredNannies(body);
+        console.log(body);
+      });
+  }
+
+  // function sentenceCase(str) {
+  //   let strLower = str.toLowerCase();
+  //   return strLower
+  //     .split(" ")
+  //     .map((item) => {
+  //       const word = item.split("");
+  //       word[0] = word[0].toUpperCase();
+  //       return word.join("");
+  //     })
+  //     .join(" ");
+  // }
 
   return isLoading ? (
     <div>Loading</div>
@@ -69,6 +106,11 @@ export default function Content() {
             <Search value={searchArr} onClick={handleClick} />
           </DataContext.Provider>
         </Grid>
+        {filteredNannies ? (
+          filteredNannies.map((nanny) => <Nanny key={nanny.id} nanny={nanny} />)
+        ) : (
+          <div></div>
+        )}
         {showText ? (
           <React.Fragment>
             <Grid>
