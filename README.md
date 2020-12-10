@@ -37,11 +37,10 @@ DB_PASSWORD=
 The app utilises AWS S3 bucket for storing profile pictures of the nannies, so the following is also required:
 
 ```
-S3_REGION=eu-west-2
-S3_BUCKET=childcareapp
-S3_ACCESS_KEY_ID=AKIA5YQYI5CC7DNMMX7M
-S3_SECRET_ACCESS_KEY=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
-```
+S3_REGION=
+S3_BUCKET=
+S3_ACCESS_KEY_ID=
+S3_SECRET_ACCESS_KEY=
 
 ### How it works
 
