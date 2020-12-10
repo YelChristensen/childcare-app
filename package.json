@@ -33,11 +33,12 @@
     "uuid": "^8.3.1"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "start-dev": "nodemon server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
