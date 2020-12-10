@@ -54,3 +54,4 @@ The app fetches all nanny profiles from the database, takes data from "city" and
 + Ability to add more profiles
 + Create login routes for nannies and parents
 + Activate the links 
++ Write tests
