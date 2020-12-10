@@ -1,70 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Childcare-App
 
 ![App Screenshot](/src/assets/ScreenshotMain.png)
 
-## Available Scripts
+## An app for finding a nanny for your child.
 
-In the project directory, you can run:
+**Childcare-App** is an online tool for finding childcare in your town. To find a candidate, use dropdown menu to narrow your search or click "See all" to browse profiles. 
 
-### `yarn start`
+Whilst this is a very simple app, it is the first project I've built completely on my own from scratch (using create-react-app). The aims of the project were:
+- To get coding again
+- To see if I am able to build something on my own (well, apart from relying heavily on Google, YouTube and StackOverflow ;))
+- To learn React Hooks and Material UI, which I have not used before 
+- To try out S3 bucket for storing images which I haven't used before either
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Techologies
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- React Hooks
+- Node
+- PostgreSQL
+- Material UI
 
-### `yarn test`
+### Installation and set-up
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- clone the repo and run `npm install` to donwload dependencies.
+- create a local PostgreSQL database and initialise it by running the query in `database.sql`.
+- add the config variables below to your `.env` file.
 
-### `yarn build`
+```
+DB_HOST=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- run `npm start` to launch and navigate to localhost:8080 to view in your browser.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The app utilises AWS S3 bucket for storing profile pictures of the nannies, so the following is also required:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+S3_REGION=eu-west-2
+S3_BUCKET=childcareapp
+S3_ACCESS_KEY_ID=AKIA5YQYI5CC7DNMMX7M
+S3_SECRET_ACCESS_KEY=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
+```
 
-### `yarn eject`
+### How it works
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The app fetches all nanny profiles from the database, takes data from "city" and "filter" column, filters it down, so it isn't repeated and populates the dropdown fields. When "Search" button is pressed, an array of search parameters (collected from dropdown) is sent to fetch the relevant profiles and displyed on the page. The child's age filter works by checking that the age selected by the parent falls within "min_child_age" and "max_child_age" provided by the nanny and stored in the database.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Todos:
++ Deploy to Heroku
++ Fine-tune CSS and responsive design
++ Amend dropdown, allowing to filter by one parameter (rather than requiring all three)
++ Ability to add more profiles
++ Create login routes for nannies and parents
++ Activate the links 
