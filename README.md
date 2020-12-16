@@ -4,11 +4,11 @@
 
 ## An app for finding a nanny for your child.
 
-**Childcare-App** is an online tool for finding childcare in your town. To find a candidate, use dropdown menu to narrow your search or click "See all" to browse profiles. 
+**Childcare-App** is an online tool for finding childcare in your area. To find a candidate, use dropdown menu to narrow your search or click "See all" to browse profiles. 
 
-Whilst this is a very simple app, it is the first project I've built completely on my own from scratch (using create-react-app). The aims of the project were:
+Whilst this is a basic app, it is the first project I've built completely on my own from scratch (using create-react-app). The aims of the project were:
 - To get coding again
-- To see if I am able to build something on my own (well, apart from relying heavily on Google, YouTube and StackOverflow ;))
+- To test my ability to build an app on my own (well, apart from relying heavily on Google, YouTube and StackOverflow ;))
 - To learn React Hooks and Material UI, which I have not used before 
 - To try out S3 bucket for storing images which I haven't used before either
 
